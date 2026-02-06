@@ -66,12 +66,18 @@ class SiteOrigin_Settings_Page_Settings {
 			$single->meta[ $type . '_' . $id ] = $single->get_settings_values( $type, $id );
 		}
 
-		// Return the value
+
 		if ( empty( $key ) ) {
-			return $single->meta[ $type . '_' . $id ];
+			$value = $single->meta[ $type . '_' . $id ];
 		} else {
-			return isset( $single->meta[ $type . '_' . $id ][ $key ] ) ? $single->meta[ $type . '_' . $id ][ $key ] : $default;
+			$value = isset( $single->meta[ $type . '_' . $id ][ $key ] ) ? $single->meta[ $type . '_' . $id ][ $key ] : $default;
 		}
+
+		return apply_filters(
+			'siteorigin_page_setting_get_' . $key,
+			$value,
+			$default
+		);
 	}
 
 	public function get_settings( $type, $id ) {
@@ -120,7 +126,7 @@ class SiteOrigin_Settings_Page_Settings {
 						break;
 
 					case 'WP_Post':
-						$type = 'post';
+						$type = $object->post_type;
 						$id = $object->ID;
 						break;
 

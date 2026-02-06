@@ -1,4 +1,4 @@
-# Copyright (C) 2024 origami
+# Copyright (C) 2026 origami
 # This file is distributed under the same license as the origami package.
 msgid ""
 msgstr ""
